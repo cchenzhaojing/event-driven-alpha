@@ -57,7 +57,7 @@ flowchart LR
     C --> D[Rolling ML Training]
     D --> E[Deviation Signal]
     E --> F[Quintile Backtest]
-    F --> G[Ablation & SHAP]
+    F --> G[Ablation and SHAP]
 ```
 
 ---
@@ -142,20 +142,21 @@ Three-stage tuning under a **rolling training framework**:
 
 ```mermaid
 flowchart TB
-    subgraph Stage I
-        A1[Fix train window / test window / horizon] --> A2[Sweep LGBM hyperparameters]
-        A2 --> A3[Select by mean RankIC / std RankIC]
+    subgraph s1 ["Stage I: Model-Level Tuning"]
+        A1["Fix train window, test window, horizon"] --> A2["Sweep LGBM hyperparameters"]
+        A2 --> A3["Select by mean RankIC / std RankIC"]
     end
-    subgraph Stage II
-        B1[Fix LGBM architecture] --> B2[Sweep horizon / train / test windows]
-        B2 --> B3[Random label shuffle test]
-        B3 --> B4[Check label overlap / autocorrelation]
+    subgraph s2 ["Stage II: Training-Level Tuning"]
+        B1["Fix LGBM architecture"] --> B2["Sweep horizon, train, test windows"]
+        B2 --> B3["Random label shuffle test"]
+        B3 --> B4["Check label overlap and autocorrelation"]
     end
-    subgraph Stage III
-        C1[Fix model + training config] --> C2[Feature importance pruning]
-        C2 --> C3[Retain 32 features]
+    subgraph s3 ["Stage III: Feature Selection"]
+        C1["Fix model and training config"] --> C2["Feature importance pruning"]
+        C2 --> C3["Retain 32 features"]
     end
-    Stage I --> Stage II --> Stage III
+    A3 --> B1
+    B4 --> C1
 ```
 
 #### Rolling Training
