@@ -2,9 +2,6 @@
 
 **A Machine Learning Approach to Detecting Event-Driven Price Deviations**
 
-Columbia University · IEOR 4742 — Deep Learning for OR & FE  
-Wellington Group 3: Rohan Mirchandani, Zhaojing Chen, Wei Cao
-
 > **Disclaimer:** This repository contains research code and methodology only. **Proprietary market and textual data are not included** due to licensing and privacy constraints.
 
 ---
